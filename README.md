@@ -23,11 +23,12 @@ I have mostly streamlined wallet installation in install_wallet.py.
 ```
 cd wallet/
 python install_wallet.py
+cd ..
 ```
 The code will generate run_wallet.sh which is a script that runs all wallets. Run it on boot every time.
 
 ```
-./run_wallet.sh
+./wallet/run_wallet.sh
 ```
 
 Quite a few coins use new bitcoin code and have dropped support for getwork which ccminer uses for solo-mining. I have developed patches that add getwork back to the code for some of the coins. I have successfully mined blocks for GRS and SIB. But some others like VTC, MONA, LBC and DGB are still being tested. 
@@ -39,11 +40,13 @@ Install Nvidia driver and CUDA. CUDA 7.5 or 8.0 are preferred because of miner s
 For miners I personally use open source ccminer forks by [tpruvot](https://github.com/tpruvot/ccminer) and [alexis78](https://github.com/alexis78). Please donate to the authors to keep open source mining going.
 
 ```
+mkdir miner
 cd miner
 git clone https://github.com/tpruvot/ccminer ccminer-tpruvot
 cd ccminer-tpruvot;./build.sh;cd ..
 git clone https://github.com/alexis78/ccminer ccminer-alexis
 cd ccminer-alexis;./build.sh;cd ..
+cd ..
 ```
 
 You may also use other ccminer forks, as well as closed source miners if config.py is configured properly.
