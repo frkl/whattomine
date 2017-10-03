@@ -8,7 +8,7 @@ Intended for hobby mining only.
 
 ## Install dependencies
 
-For a fresh Ubuntu install, The following packages need to be installed.
+For a fresh Ubuntu install, the following packages need to be installed.
 
 ```
 sudo apt-get update
@@ -25,7 +25,7 @@ cd wallet/
 python install_wallet.py
 cd ..
 ```
-The code will generate run_wallet.sh which is a script that runs all wallets. Run it on boot every time.
+The code will download and compile all wallets and in the end generate run_wallet.sh which is a script that runs all wallets. Run it on boot every time.
 
 ```
 ./wallet/run_wallet.sh
