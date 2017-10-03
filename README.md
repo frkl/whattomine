@@ -53,7 +53,7 @@ You may also use other ccminer forks, as well as closed source miners if config.
 
 ## Configure the profit switch script
 
-Update exchange addresses with your addresses in config.py. You may also modify which coins you are mining, what username and password you are using for the wallets (need to be consistent with wallet/run_wallet.sh).
+Update exchange addresses with your addresses in config.py. You may also update my hashrates with your actual hashrates, modify which coins you are mining, what username and password you are using for the wallets (need to be consistent with wallet/run_wallet.sh).
 
 Make sure the wallets are running, and then run
 ```
