@@ -94,7 +94,7 @@ hashrate['bitcore']=104							#tpruvot
 #Wallet miners (algo,stratum,user,pass)
 alexis='./miner/ccminer-alexis/ccminer -a %s -o %s -u %s -p %s'
 tpruvot='./miner/ccminer-tpruvot/ccminer -a %s -o %s -u %s -p %s'
-spread='wine ./miner/ccminer-sp-spread9/spreadminer.exe %.0s -o %s -u %s -p %s'
+#spread='wine ./miner/ccminer-sp-spread9/spreadminer.exe %.0s -o %s -u %s -p %s' #private miner
 
 #Specify which (coin,algorithm,miner) you use for wallet mining
 #Make sure you 
@@ -105,24 +105,24 @@ I_wallet_mine=list();
 I_wallet_mine.append(['log','skein2',alexis]);
 #I_wallet_mine.append(['aur','myr-gr',alexis]);
 #I_wallet_mine.append(['aur','skein',alexis]);
-I_wallet_mine.append(['spr','spread',spread,' -x 15']);
+#I_wallet_mine.append(['spr','spread',spread,' -x 15']); # require special miner. 
 I_wallet_mine.append(['chc','c11',alexis]);
 I_wallet_mine.append(['xlr','nist5',alexis]);
 I_wallet_mine.append(['vlt','veltor',alexis]);
 I_wallet_mine.append(['boat','hmq1725',tpruvot]);
 I_wallet_mine.append(['j','myr-gr',alexis]);
 I_wallet_mine.append(['sib','sib',alexis]);
-I_wallet_mine.append(['lbc','lbry',alexis]);
+I_wallet_mine.append(['lbc','lbry',alexis]); # experimental. I have never solo mined a block yet.
 I_wallet_mine.append(['grs','groestl',tpruvot]);
 I_wallet_mine.append(['mac','timetravel',tpruvot]);
-I_wallet_mine.append(['ftc','neoscrypt',tpruvot]);
-I_wallet_mine.append(['vtc','lyra2v2',alexis]);
-I_wallet_mine.append(['mona','lyra2v2',alexis]);
-I_wallet_mine.append(['dgb','myr-gr',alexis]);
-I_wallet_mine.append(['dgb','skein',alexis]);
-I_wallet_mine.append(['xvg','myr-gr',alexis]);
-I_wallet_mine.append(['xvg','x17',alexis]);
-I_wallet_mine.append(['xvg','lyra2v2',alexis]);
+I_wallet_mine.append(['ftc','neoscrypt',tpruvot]); # experimental. Takes a long time to sync
+I_wallet_mine.append(['vtc','lyra2v2',alexis]); # experimental. Takes a long time to sync
+I_wallet_mine.append(['mona','lyra2v2',alexis]); # experimental
+I_wallet_mine.append(['dgb','myr-gr',alexis]); # experimental
+I_wallet_mine.append(['dgb','skein',alexis]); # experimental
+#I_wallet_mine.append(['xvg','myr-gr',alexis]); #verge wallets are hard to sync. Enable it only if you know how to sync that wallet.
+#I_wallet_mine.append(['xvg','x17',alexis]);
+#I_wallet_mine.append(['xvg','lyra2v2',alexis]);
 
 
 #Pool miners
