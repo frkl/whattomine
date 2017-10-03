@@ -20,7 +20,7 @@ for coin in config.remote_wallets:
 print('Scanning local wallets...');
 cnt=0;
 for port in config.scan_ports:
-	access=ServiceProxy({'url':config.scan_api%port,'username':config.wallet_username,'password':config.wallet_password},timeout=1);
+	access=ServiceProxy({'url':config.scan_api%port,'username':config.wallet_username,'password':config.wallet_password},timeout=5);
 	try:
 		info=access.help();
 		identified=False;
@@ -28,8 +28,11 @@ for port in config.scan_ports:
 			if info.find(constant.wallets_key[coin])>0:
 				identified=True;
 				if not(coin in wallets):
-					print('Found %s wallet at port %d'%(coin,port));
-					wallets[coin]={'name':coin,'url':{'url':config.scan_api%port,'username':config.wallet_username,'password':config.wallet_password},'algorithm':constant.algo_lookup[coin],'type':'wallet'};
+					try:
+						print('Found %s wallet at port %d'%(coin,port));
+						wallets[coin]={'name':coin,'url':{'url':config.scan_api%port,'username':config.wallet_username,'password':config.wallet_password},'algorithm':constant.algo_lookup[coin],'type':'wallet'};
+					except:
+						print('error adding wallet');
 				break;
 		
 		if not identified:

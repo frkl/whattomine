@@ -1,0 +1,17 @@
+/home/grrrgrrr/whattomine/wallet/woodcoin/src/woodcoind --datadir=/home/grrrgrrr/whattomine/wallet/woodcoin/data -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6001 -port=8001  &
+/home/grrrgrrr/whattomine/wallet/auroracoin/src/auroracoind --datadir=/home/grrrgrrr/whattomine/wallet/auroracoin/data_groestl -algo=groestl -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6011 -port=8011  &
+/home/grrrgrrr/whattomine/wallet/auroracoin/src/auroracoind --datadir=/home/grrrgrrr/whattomine/wallet/auroracoin/data_skein -algo=skein -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6012 -port=8012  &
+/home/grrrgrrr/whattomine/wallet/spreadcoin/src/spreadcoind --datadir=/home/grrrgrrr/whattomine/wallet/spreadcoin/data -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6021 -port=8021  &
+/home/grrrgrrr/whattomine/wallet/solariscoin/src/solariscoind --datadir=/home/grrrgrrr/whattomine/wallet/solariscoin/data -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6031 -port=8031  &
+/home/grrrgrrr/whattomine/wallet/veltor/src/veltord --datadir=/home/grrrgrrr/whattomine/wallet/veltor/data -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6041 -port=8041  &
+/home/grrrgrrr/whattomine/wallet/chaincoin/src/chaincoind --datadir=/home/grrrgrrr/whattomine/wallet/chaincoin/data -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6051 -port=8051  &
+/home/grrrgrrr/whattomine/wallet/joincoin/src/joincoind --datadir=/home/grrrgrrr/whattomine/wallet/joincoin/data -algo=groestle -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6061 -port=8061 -addnode=drtevq326tweby2k.onion:17941 -addnode=bfyswf2wu5ofqxyb.onion:17941 -addnode=gdhtrc7qoh3qowvf.onion:17941 -addnode=jzxs646bc3rajr3u.onion:17941 -addnode=p44az425ct7rhen6.onion:17941 -addnode=eldi5al5je6gw24u.onion:17941 -addnode=53zy47p5wly5penk.onion:17941 -addnode=vcn4cz4mhs4acnqd.onion:17941 &
+/home/grrrgrrr/whattomine/wallet/signatum/src/signatumd --datadir=/home/grrrgrrr/whattomine/wallet/signatum/data -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6071 -port=8071  &
+/home/grrrgrrr/whattomine/wallet/boatcoin/src/doubloond --datadir=/home/grrrgrrr/whattomine/wallet/boatcoin/data -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6081 -port=8081  &
+/home/grrrgrrr/whattomine/wallet/groestlcoin/src/groestlcoind --datadir=/home/grrrgrrr/whattomine/wallet/groestlcoin/data -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6091 -port=8091  &
+/home/grrrgrrr/whattomine/wallet/feathercoin/src/feathercoind --datadir=/home/grrrgrrr/whattomine/wallet/feathercoin/data -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6101 -port=8101  &
+/home/grrrgrrr/whattomine/wallet/machinecoin/src/machinecoind --datadir=/home/grrrgrrr/whattomine/wallet/machinecoin/data -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6111 -port=8111  &
+/home/grrrgrrr/whattomine/wallet/monacoin/src/monacoind --datadir=/home/grrrgrrr/whattomine/wallet/monacoin/data -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6121 -port=8121  &
+/home/grrrgrrr/whattomine/wallet/vertcoin/src/vertcoind --datadir=/home/grrrgrrr/whattomine/wallet/vertcoin/data -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6131 -port=8131  &
+/home/grrrgrrr/whattomine/wallet/lbry/src/lbrycrdd --datadir=/home/grrrgrrr/whattomine/wallet/lbry/data -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6141 -port=8141  &
+/home/grrrgrrr/whattomine/wallet/sibcoin/src/sibcoind --datadir=/home/grrrgrrr/whattomine/wallet/sibcoin/data -server=1 -rpcuser=grrr -rpcpassword=13457 -rpcport=6151 -port=8151  &

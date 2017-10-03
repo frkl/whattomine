@@ -46,23 +46,40 @@ if len(rewards)>0:
 
 
 total_balance_btc=0;
-print('wallet balance');
+print('wallet balance / unconfirmed balance');
 for port in config.scan_ports:
-	access=ServiceProxy({'url':config.scan_api%port,'username':config.wallet_username,'password':config.wallet_password},timeout=1);
+	access=ServiceProxy({'url':config.scan_api%port,'username':config.wallet_username,'password':config.wallet_password},timeout=5);
 	try:
 		info=access.help();
 		for coin in constant.wallets_key:
 			if info.find(constant.wallets_key[coin])>0:
 				if not(coin in constant.multi_algo_coins):
 					v=access.getbalance();
-					print('%s: %f'%(coin,v));
-					total_balance_btc=total_balance_btc+v*exchange.tickers[coin];
+					#print('%s: %f'%(coin,v));
+					
+					w=access.listtransactions();
+					x=0;
+					for t in w:
+						if t['category']=='immature':
+							x=x+t['amount'];
+					
+					print('%s: %f / %f'%(coin,v,x));
+					total_balance_btc=total_balance_btc+(x+v)*exchange.tickers[coin];
 					break;
 				else:
 					info2=access.getinfo();
 					v=access.getbalance();
-					print('%s-%s: %f'%(coin,info2['pow_algo'],v));
-					total_balance_btc=total_balance_btc+v*exchange.tickers[coin];
+					#print('%s-%s: %f'%(coin,info2['pow_algo'],v));
+					
+					w=access.listtransactions();
+					x=0;
+					for t in w:
+						if t['category']=='immature':
+							x=x+t['amount'];
+					
+					print('%s-%s: %f / %f'%(coin,info2['pow_algo'],v,x));
+					total_balance_btc=total_balance_btc+(x+v)*exchange.tickers[coin];
+					break;
 		
 	except:
 		pass;

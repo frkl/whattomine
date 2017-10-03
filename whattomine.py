@@ -117,6 +117,10 @@ class wallet:
 									#Read reward as sum of all coinbase transactions
 									#Does not really work for coins with dev fees
 									reward=sum([vout['value'] for vout in tx['vout']]);
+									if self.name=='chc':
+										reward=reward/8.0*5.2;
+									elif self.name=='sib':
+										reward=reward/2.0;
 									self.reward_history.append((i,reward));
 									if len(self.reward_history)>self.reward_history_limit:
 										self.reward_history.pop(0);
@@ -173,12 +177,15 @@ class whattomine:
 			self.reward=data['block_reward24'];
 			if self.name=='kmd':
 				#komodo work around
-				self.difficulty[self.algorithm]=data['difficulty']/pow(2,41);
-			elif self.name=='dmd' or self.name=='pasc' or self.name=='grs' or self.name=='xzc':
-				#dmd work around
-				self.difficulty[self.algorithm]=data['difficulty']/pow(2,0);
+				self.difficulty[self.algorithm]=data['difficulty']/pow(2.0,29);
+			elif self.name=='zec' or self.name=='zcl':
+				#zec work around
+				self.difficulty[self.algorithm]=data['difficulty']/pow(2.0,20);
+			elif self.name=='eth' or self.name=='sc' or self.name=='etc':
+				#eth and sia work around
+				self.difficulty[self.algorithm]=data['difficulty']/pow(2.0,32);
 			else:
-				self.difficulty[self.algorithm]=data['difficulty']/pow(2,32);
+				self.difficulty[self.algorithm]=data['difficulty']/pow(2.0,0);
 			
 		except:
 			print('Wallet %s: network error'%(self.name));
@@ -215,6 +222,7 @@ class wallet_manager:
 			self.wallets[name].update(method);
 		return;
 
+#deprecated
 class chainz:
 	url='http://chainz.cryptoid.info/explorer/api.dws?q=summary'
 	name='';
@@ -383,7 +391,7 @@ class miners:
 	miners=list();
 	miner_profitability=list();
 	general_profitability=list();
-	current={'name':'','command':'','process':None,'time':-1,'expected_reward':[]};
+	current={'name':'','command':'','process':None,'time':-1,'expected_reward':[],'expected_reward_btc':0};
 	history=list();
 	def __init__(self):
 		self.hashrate=dict();
@@ -391,7 +399,7 @@ class miners:
 		self.miner_profitability=list();
 		self.general_profitability=list();
 		self.history=list();
-		self.current={'name':'','command':'','process':None,'time':-1,'expected_reward':[]};
+		self.current={'name':'','command':'','process':None,'time':-1,'expected_reward':[],'expected_reward_btc':0};
 	
 	def load(self,fname):
 		try:
@@ -478,6 +486,8 @@ class miners:
 			#	self.current['process']='';
 			#	self.history.append(self.current);
 			
+			print('Switching from %s to %s'%(self.current['name'],most_profitable['name']));
+			print('Switched %f %f'%(self.current['expected_reward_btc'],most_profitable['reward_btc']));
 			self.current=dict();
 			self.current['process']=subprocess.Popen(command,stdout=subprocess.PIPE,shell=True);
 			self.current['name']=most_profitable['name'];

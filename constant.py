@@ -10,6 +10,7 @@ whattomine_lookup['grs']={'name':'grs','url':'https://www.whattomine.com/coins/4
 whattomine_lookup['zcl']={'name':'zcl','url':'https://www.whattomine.com/coins/167.json','algorithm':'eqhash'};
 whattomine_lookup['kmd']={'name':'kmd','url':'https://www.whattomine.com/coins/174.json','algorithm':'eqhash'};
 whattomine_lookup['pasc']={'name':'pasc','url':'https://www.whattomine.com/coins/172.json','algorithm':'pascal'};
+whattomine_lookup['btx']={'name':'btx','url':'https://www.whattomine.com/coins/202.json','algorithm':'bitcore'};
 
 #What algos a coin use.
 algo_lookup=dict();
@@ -26,18 +27,23 @@ algo_lookup['mona']='lyra2v2';
 algo_lookup['vtc']='lyra2v2';
 algo_lookup['lbc']='lbry';
 algo_lookup['btx']='bitcore';
-algo_lookup['j']=['bastion','myr-gr','whirl','luffa','keccak','nist5'];
+algo_lookup['j']=['bastion','myr-gr','whirl','luffa','keccak','nist5','penta'];
 algo_lookup['dgb']=['skein','myr-gr'];
 algo_lookup['orb']='neoscrypt';
 algo_lookup['ftc']='neoscrypt';
 algo_lookup['bsd']='xevan';
 algo_lookup['xre']='x11evo';
 algo_lookup['bntly']='x17';
+algo_lookup['mac']='timetravel';
+algo_lookup['sib']='sib';
+algo_lookup['grs']='groestl';
+algo_lookup['myr']=['groestl','skein'];
+algo_lookup['xzc']=['lyra2z'];
 
 
 
 #These coins have multiple algos, getinfo()['pow_algo'] is used to check algo.
-multi_algo_coins=['aur','dgb','myr','j'];
+multi_algo_coins=['aur','dgb','myr','j','xvg'];
 
 
 #keys to tell what wallet a port corresponds to
@@ -61,6 +67,12 @@ wallets_key['bsd']='bitsend';
 wallets_key['xre']='revolvercoin';
 wallets_key['orb']='orbitcoin';
 wallets_key['bntly']='bentleycoin';
+wallets_key['grs']='groestlcoin';
+wallets_key['mac']='machinecoin';
+wallets_key['sib']='sibcoin';
+wallets_key['myr']='myriad';
+wallets_key['xvg']='VERGE';
+wallets_key['xzc']='zcoin';
 
 #Exchange
 exchange=dict();
@@ -79,17 +91,20 @@ exchange['lbc']=['bittrex','BTC-LBC']
 exchange['vtc']=['bittrex','BTC-VTC']
 exchange['xvg']=['bittrex','BTC-XVG']
 exchange['mona']=['bittrex','BTC-MONA']
-exchange['myr']=['bittrex','BTC-MYR']
+exchange['myr']=['bittrex','BTC-XMY']
 exchange['zcl']=['bittrex','BTC-ZCL']
 exchange['kmd']=['bittrex','BTC-KMD']
 exchange['dmd']=['bittrex','BTC-DMD']
 exchange['grs']=['bittrex','BTC-GRS']
 exchange['bsd']=['bittrex','BTC-BSD']
+exchange['sib']=['bittrex','BTC-SIB']
+exchange['myr']=['bittrex','BTC-MYR']
 exchange['xlr']=['cryptopia','XLR/BTC']
 exchange['chc']=['cryptopia','CHC/BTC']
 exchange['orb']=['cryptopia','ORB/BTC']
 exchange['btx']=['cryptopia','BTX/BTC']
 exchange['xre']=['cryptopia','XRE/BTC']
+exchange['mac']=['cryptopia','MAC/BTC']
 exchange['log']=['ccex','log-btc']
 exchange['vlt']=['yobit','vlt_btc']
 exchange['boat']=['nova','BTC_BOAT']
