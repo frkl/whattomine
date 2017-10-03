@@ -93,6 +93,6 @@ Use
 python test_miners.py
 ```
 
-to check if miners are able to mine into those wallets are not.
+to check if miners are able to mine into those wallets or not.
 
 Hopefully this gives you a reason to buy cards for deep learning.
