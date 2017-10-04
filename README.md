@@ -16,6 +16,20 @@ sudo apt-get install -y build-essential libtool autotools-dev automake pkg-confi
 pip install future
 ```
 
+Install Nvidia driver and CUDA. CUDA 7.5 or 8.0 are preferred because of miner support. 
+
+I find adding the following lines into ~/.bashrc help
+
+```
+export CUDA_HOME=/usr/local/cuda/
+export CPATH=/usr/local/cuda/include:$CPATH
+export LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/ssl/lib:$LIBRARY_PATH
+export PATH=/usr/local/cuda/bin:/usr/lib/i386-linux-gnu/:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64/:/usr/local/cuda/lib/:/usr/local/ssl/lib:$LD_LIBRARY_PATH
+export DYLD_LIBRARY_PATH=/usr/local/cuda/lib64/:/usr/local/cuda/lib/:/usr/local/ssl/lib:$DYLD_LIBRARY_PATH
+```
+
+
 ## Install wallets
 
 I have mostly streamlined wallet installation in install_wallet.py.
@@ -34,8 +48,6 @@ The code will download and compile all wallets and in the end generate run_walle
 Quite a few coins use new bitcoin code and have dropped support for getwork which ccminer uses for solo-mining. I have developed patches that add getwork back to the code for some of the coins. I have successfully mined blocks for GRS and SIB. But some others like VTC, MONA, LBC and DGB are still being tested. 
 
 ## Install miners
-
-Install Nvidia driver and CUDA. CUDA 7.5 or 8.0 are preferred because of miner support. 
 
 For miners I personally use open source ccminer forks by [tpruvot](https://github.com/tpruvot/ccminer) and [alexis78](https://github.com/alexis78). Please donate to the authors to keep open source mining going.
 
