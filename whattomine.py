@@ -121,6 +121,10 @@ class wallet:
 										reward=reward/8.0*5.2;
 									elif self.name=='sib':
 										reward=reward/2.0;
+									elif self.name=='bsd':
+										reward=reward/5.0; #25->5
+									elif self.name=='xlrx':
+										reward=reward/2.0*1.6; #2->1.6
 									self.reward_history.append((i,reward));
 									if len(self.reward_history)>self.reward_history_limit:
 										self.reward_history.pop(0);
@@ -269,6 +273,7 @@ class exchange:
 	cryptopia_api='https://www.cryptopia.co.nz/api/GetMarkets';
 	yobit_api='https://yobit.net/api/3/ticker/';
 	novaexchange_api='https://novaexchange.com/remote/v2/markets/';
+	coinmarketcap_api='https://api.coinmarketcap.com/v1/ticker/%s/';
 	def __init__(self):
 		self.tickers=dict();
 		self.coins=dict();
@@ -355,6 +360,17 @@ class exchange:
 			
 		except:
 			print('Exchange: error getting price from novaexchange');
+		
+		#coinmarketcap
+		for coin in self.coins:
+			pair=self.coins[coin];
+			if pair[0]=='coinmarketcap':
+				try:
+					r=requests.get(self.coinmarketcap_api%pair[1],timeout=10);
+					ticker=json.loads(r.content);
+					self.tickers[coin]=float(ticker[0]['price_btc']);
+				except:
+					print('Exchange: error getting %s price from coinmarketcap'%coin);
 		
 		#Yobit
 		#First craft the url

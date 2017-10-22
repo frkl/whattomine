@@ -4,7 +4,6 @@
 #include <openssl/sha.h>
 #include "wallet/wallet.h"
 #include "utilmoneystr.h"
-#include "consensus/merkle.h"
 #include "uint256.h"
 typedef map<uint256, pair<CBlock*, CScript> > mapNewBlock_t;
 extern CWallet* pwalletMain;
@@ -161,17 +160,9 @@ bool ProcessBlock(CValidationState &state, CNode* pfrom, CBlock* pblock)
         }
     }
 
-    {
-        LOCK(cs_main);
-        BlockMap::iterator mi = mapBlockIndex.find(pblock->hashPrevBlock);
-        if (mi != mapBlockIndex.end()) {
-            UpdateUncommittedBlockStructures(*pblock, mi->second, Params().GetConsensus());
-        }
-    }
     submitblock_StateCatcher_G sc(pblock->GetHash());
     RegisterValidationInterface(&sc);
-	std::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(*pblock);
-    bool fAccepted = ProcessNewBlock(Params(), shared_pblock, true, NULL);
+    bool fAccepted = ProcessNewBlock(state, NULL, pblock);
     UnregisterValidationInterface(&sc);
     if (fBlockPresent)
     {
@@ -192,7 +183,7 @@ bool ProcessBlock(CValidationState &state, CNode* pfrom, CBlock* pblock)
 bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
 {
   uint256 hashPoW = pblock->GetHash();
-  uint256 hashTarget = ArithToUint256(arith_uint256().SetCompact(pblock->nBits));
+  uint256 hashTarget = uint256().SetCompact(pblock->nBits);
   uint256 hashBlock = pblock->GetHash();
   //// debug print
   LogPrintf("Wallet mining:\n");
@@ -200,12 +191,17 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
   hashBlock.GetHex(),
   hashPoW.GetHex(),
   hashTarget.GetHex());
-  LogPrintf("generated %s\n", FormatMoney(pblock->vtx[0]->vout[0].nValue));
+  LogPrintf("generated %s\n", FormatMoney(pblock->vtx[0].vout[0].nValue));
   // Found a solution
   {
     LOCK(cs_main);
     if (pblock->hashPrevBlock != chainActive.Tip()->GetBlockHash())
-      return error("Wallet mining : generated block is stale");
+    return error("Wallet mining : generated block is stale");
+    // Track how many getdata requests this block gets
+    {
+      LOCK(wallet.cs_wallet);
+      wallet.mapRequestCount[pblock->GetHash()] = 0;
+    }
     // Process this block the same as if we had received it from another node
     CValidationState state;
     if (!ProcessBlock(state, NULL, pblock))
@@ -215,10 +211,10 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
 }
 
 
-UniValue getwork(const JSONRPCRequest& request)
+Value getwork(const Array& params, bool fHelp)
 {
 	InitRPCMining();
-    if (request.fHelp || request.params.size() > 1){
+    if (fHelp || params.size() > 1){
         throw runtime_error(
             "getwork ( \"data\" )\n"
             "\nIf 'data' is not specified, it returns the formatted hash data to work on.\n"
@@ -238,26 +234,20 @@ UniValue getwork(const JSONRPCRequest& request)
             + HelpExampleCli("getwork", "")
             + HelpExampleRpc("getwork", "")
 	);}
-		
-    if(!g_connman)
-        throw JSONRPCError(RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality missing or disabled");
-
-    if (g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL) == 0)
-        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "This wallet is not connected!");
-
+	
     if (IsInitialBlockDownload())
         throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "This wallet is downloading blocks...");
 
     static mapNewBlock_t mapNewBlock;    // FIXME: thread safety
-    static vector<std::unique_ptr<CBlockTemplate>> vNewBlockTemplate;
+    static vector<CBlockTemplate*> vNewBlockTemplate;
 
-    if (request.params.size() == 0)
+    if (params.size() == 0)
     {
         // Update block
         static unsigned int nTransactionsUpdatedLast;
         static CBlockIndex* pindexPrev;
         static int64_t nStart;
-        static std::unique_ptr<CBlockTemplate> pblocktemplate;
+        static CBlockTemplate* pblocktemplate;
         if (pindexPrev != chainActive.Tip() ||
             (mempool.GetTransactionsUpdated() != nTransactionsUpdatedLast && GetTime() - nStart > 60))
         {
@@ -265,9 +255,9 @@ UniValue getwork(const JSONRPCRequest& request)
             {
                 // Deallocate old blocks since they're obsolete now
                 mapNewBlock.clear();
-                for (std::vector<std::unique_ptr<CBlockTemplate>>::size_type i=0;i!=vNewBlockTemplate.size();i++)
+                for (std::vector<CBlockTemplate*>::size_type i=0;i!=vNewBlockTemplate.size();i++)
 				{
-                    vNewBlockTemplate[i].reset();
+                    delete vNewBlockTemplate[i];
 				}
                 vNewBlockTemplate.clear();
             }
@@ -280,18 +270,17 @@ UniValue getwork(const JSONRPCRequest& request)
             CBlockIndex* pindexPrevNew = chainActive.Tip();
             nStart = GetTime();
 			
-			pblocktemplate=BlockAssembler(Params()).CreateNewBlock(scriptPubKey,miningAlgo);
+			pblocktemplate=CreateNewBlock(Params(), scriptPubKey);
             if (!pblocktemplate)
                 throw JSONRPCError(RPC_OUT_OF_MEMORY, "Out of memory");
-            vNewBlockTemplate.push_back(std::move(pblocktemplate));
+            vNewBlockTemplate.push_back(pblocktemplate);
             // Need to update only after we know CreateNewBlock succeeded
             pindexPrev = pindexPrevNew;
         }
         CBlock* pblock = &(vNewBlockTemplate.back()->block); // pointer for convenience
 
         // Update nTime
-		const Consensus::Params& consensusParams = Params().GetConsensus();
-        UpdateTime(pblock, consensusParams, pindexPrev, miningAlgo);
+        UpdateTime(pblock,  pindexPrev);
         pblock->nNonce = 0;
 
         // Update nExtraNonce
@@ -300,16 +289,16 @@ UniValue getwork(const JSONRPCRequest& request)
         IncrementExtraNonce(pblock, pindexPrev, nExtraNonce);
 
         // Save
-        mapNewBlock[pblock->hashMerkleRoot] = make_pair(pblock, pblock->vtx[0]->vin[0].scriptSig);
+        mapNewBlock[pblock->hashMerkleRoot] = make_pair(pblock, pblock->vtx[0].vin[0].scriptSig);
 
         // Pre-build hash buffers
         char pmidstate[32];
         char pdata[128];
         char phash1[64];
         FormatHashBuffers(pblock, pmidstate, pdata, phash1);
-        uint256 hashTarget = ArithToUint256(arith_uint256().SetCompact(pblock->nBits));
+        uint256 hashTarget = uint256().SetCompact(pblock->nBits);
 
-        UniValue result(UniValue::VOBJ);
+        Object result;
         result.push_back(Pair("midstate", HexStr(BEGIN(pmidstate), END(pmidstate)))); // deprecated
         result.push_back(Pair("data",     HexStr(BEGIN(pdata), END(pdata))));
         result.push_back(Pair("hash1",    HexStr(BEGIN(phash1), END(phash1)))); // deprecated
@@ -320,7 +309,7 @@ UniValue getwork(const JSONRPCRequest& request)
     {
 		
         // Parse parameters
-        vector<unsigned char> vchData = ParseHex(request.params[0].get_str());
+        vector<unsigned char> vchData = ParseHex(params[0].get_str());
         if (vchData.size() != 128)
             throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter");
         CBlock* pdata = (CBlock*)&vchData[0];

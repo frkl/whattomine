@@ -20,6 +20,7 @@ algo_lookup['spr']='spread';
 algo_lookup['xvg']=['x17','lyra2v2','myr-gr'];
 algo_lookup['chc']='c11';
 algo_lookup['xlr']='nist5';
+algo_lookup['xlrx']='xevan';
 algo_lookup['vlt']='veltor';
 algo_lookup['sigt']='skunk';
 algo_lookup['boat']='hmq1725';
@@ -38,7 +39,9 @@ algo_lookup['mac']='timetravel';
 algo_lookup['sib']='sib';
 algo_lookup['grs']='groestl';
 algo_lookup['myr']=['groestl','skein'];
-algo_lookup['xzc']=['lyra2z'];
+algo_lookup['xzc']='lyra2z';
+algo_lookup['altcom']='skunk';
+algo_lookup['hsr']='hsr';
 
 
 
@@ -53,6 +56,7 @@ wallets_key['log']='woodcoin';
 wallets_key['spr']='spreadcoin';
 wallets_key['chc']='chaincoin';
 wallets_key['xlr']='solariscoin';
+wallets_key['xlrx']='solariscoin-xevan';
 wallets_key['vlt']='Veltor';
 wallets_key['sigt']='signatum';
 wallets_key['boat']='doubloon';
@@ -73,6 +77,8 @@ wallets_key['sib']='sibcoin';
 wallets_key['myr']='myriad';
 wallets_key['xvg']='VERGE';
 wallets_key['xzc']='zcoin';
+wallets_key['altcom']='altcommunity';
+wallets_key['hsr']='hshare';
 
 #Exchange
 exchange=dict();
@@ -99,18 +105,21 @@ exchange['grs']=['bittrex','BTC-GRS']
 exchange['bsd']=['bittrex','BTC-BSD']
 exchange['sib']=['bittrex','BTC-SIB']
 exchange['myr']=['bittrex','BTC-MYR']
-exchange['xlr']=['cryptopia','XLR/BTC']
+exchange['xlr']=['coinmarketcap','solaris']
+exchange['xlrx']=['coinmarketcap','solaris']
 exchange['chc']=['cryptopia','CHC/BTC']
 exchange['orb']=['cryptopia','ORB/BTC']
 exchange['btx']=['cryptopia','BTX/BTC']
 exchange['xre']=['cryptopia','XRE/BTC']
 exchange['mac']=['cryptopia','MAC/BTC']
+exchange['hsr']=['cryptopia','HSR/BTC']
 exchange['log']=['ccex','log-btc']
 exchange['vlt']=['yobit','vlt_btc']
 exchange['boat']=['nova','BTC_BOAT']
 exchange['sigt']=['nova','BTC_SIGT']
 exchange['j']=['nova','BTC_J']
 exchange['bntly']=['','']; #no exchange available
+exchange['altcom']=['','']; #no exchange available
 
 def alias(orig,see,replace,name='',cond=''):
 	if orig==see and name==cond:

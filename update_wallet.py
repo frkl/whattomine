@@ -33,7 +33,6 @@ for port in config.scan_ports:
 						wallets[coin]={'name':coin,'url':{'url':config.scan_api%port,'username':config.wallet_username,'password':config.wallet_password},'algorithm':constant.algo_lookup[coin],'type':'wallet'};
 					except:
 						print('error adding wallet');
-				break;
 		
 		if not identified:
 			print('Unidentified wallet: %s'%info);

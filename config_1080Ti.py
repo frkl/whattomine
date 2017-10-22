@@ -1,58 +1,4 @@
-#-----------------WALLETS-----------------
-#Assuming username/password are the same for all wallets
-#This is my rpc username/password, Change them to yours. As long as you don't make rpc port public it should be safe.
-wallet_username='grrr';
-wallet_password='13457';
 
-#Automatically scan ports for wallets
-#For each port, call wallet jsonrpc API to decide if 
-#  - There's a wallet using that port
-#  - Which wallet it is
-#Define which ports to scan here
-scan_api='http://127.0.0.1:%d';
-scan_ports=range(6000,12000);
-
-#For coins not suitable for wallet mining, check whattomine.com for blockchain status
-#Specify which coins to monitor here
-whattomine=['zec','eth','dcr','sc','xzc'];
-
-#Specify non-local wallets, if any
-remote_wallets=dict();
-#Format: remote_wallets['coin']={'name':'coin','url':{'url':'http://ip.ip.ip.ip:port','username':'user','password':'pass'},'algorithm':'algo','type':'wallet'};
-
-
-#-----------------EXCHANGE-----------------
-#Which exchange addresses to send the coins to
-#Create accounts on Bittrex, Cryptopia, C-Cex, Yobit, NovaExchange and Poloniex and create exchange addresses
-#Remove lines coins which you are not sending to exchanges or you wish to do so manually
-#TODO: Change my exchange addresses to your exchange addresses
-exchange_addr=dict();
-exchange_addr['aur']='AHNs7BiKkyUzQDgeomRoYxGoekBfGCeQbn'
-exchange_addr['orb']='oYMJbeLdpMf5TBoYTF1JQ7Ahbi3bqMSKpL'
-exchange_addr['dgb']='DMHTQ5MJoYgMRSk3XeL5frmpujDpwtmip1'
-exchange_addr['chc']='CYa38GJZbW6oq9cNT3GhtSUfafYFXEKVKV'
-exchange_addr['skc']='Sj5NefeFu85A7K9nyKm3HkM5ir4zm6ZGDP'
-exchange_addr['xvg']='D7gdSJaPSF7p4MqXh8ioWNtHD7UhApPLK2'
-exchange_addr['spr']='SVihb9U6aeegNqxFAiEXGjvuG5VvDz4uov'
-exchange_addr['j']='JeHuqWdCoYRgW4b9cuEzgLuLjDdXSQA6qU'
-exchange_addr['log']='WR3EKWvGWkg9MNsR1Nknvk6iHM5MUW2f6i'
-exchange_addr['vlt']='VbueM3wkqhVsjfm57XmHBTNAmmLgAwU1kF'
-exchange_addr['ftc']='72PUW7PT5L5aJJPW7LrngXi98xDTQWEsag'
-exchange_addr['boat']='BJUVhBYnFDu3rpsWWE7bjfyXS5SRWPfFxP'
-exchange_addr['grs']='FtFnpTRbERVQWoSGdhn3YXpd8asVfSBfTJ'
-exchange_addr['bsd']='iFnZWzmdLBM6Pxrq8eH1GZsR9XHsG54tfN'
-exchange_addr['mac']='MREqeDeaMqhnUqF2WAcyH9tbzDJsPLhiG6'
-exchange_addr['sib']='Sdx9cMycThX1jnLeQYTp3P1ZEr1HEz9BUj'
-exchange_addr['bsd']='iFnZWzmdLBM6Pxrq8eH1GZsR9XHsG54tfN'
-
-
-
-#----------------MINERS-----------------
-gpuinfo='export CUDA_VISIBLE_DEVICES=0,1,2,3;'
-miner_efficiency=1;
-#TODO: Benchmark all algorithms using corresponding miners and fill in your hashrates. 
-#Enter hashrate in Mh/s
-#Hashrates below are for 4x 1080Ti.
 hashrate=dict();
 hashrate['timetravel']=150						#tpruvot 
 hashrate['tribus']=400							#tpruvot 
@@ -149,14 +95,3 @@ zec_addr='t1TDtxcYDrrWXsWHvr2s8LxFEsFCuCQzYeW.x'
 
 i_decred=180;
 i_sia=180;
-
-claymore_dual_dcr='./miner/claymore-dual/ethdcrminer64 -epool %s -esm 1 -ewal %s -epsw x -dpool %s -dwal %s -dcoin dcr -dcri %d'%(eth_pool,eth_addr,dcr_pool,dcr_addr,i_decred);
-claymore_dual_sia='./miner/claymore-dual/ethdcrminer64 -epool %s -esm 1 -ewal %s -epsw x -dpool %s -dwal %s -dcoin sia -dcri %d'%(eth_pool,eth_addr,sia_pool,sia_addr,i_sia);
-ewbf_zec='./miner/ewbf-eqhash/miner --server %s --user %s --pass x'%(zec_pool,zec_addr)
-tpruvot_xzc=tpruvot%('lyra2z','stratum+tcp://us-east.lyra2z-hub.miningpoolhub.com:20581','grrrbot.grrr3','13457')
-
-pool_miners=list();
-#pool_miners.append({'name':'eth-sc','command':claymore_dual_sia,'pairs':[['eth','ethash',hashrate['ethash']],['sc','sia',hashrate['sia-dual']]]});
-#pool_miners.append({'name':'eth-dcr','command':claymore_dual_dcr,'pairs':[['eth','ethash',hashrate['ethash']],['dcr','decred',hashrate['decred-dual']]]});
-#pool_miners.append({'name':'xzc-lyra2z','command':tpruvot_xzc,'pairs':[['xzc','lyra2z',hashrate['lyra2z']]]});
-#pool_miners.append({'name':'zec-eqhash','command':ewbf_zec,'pairs':[['zec','eqhash',hashrate['eqhash']]]});

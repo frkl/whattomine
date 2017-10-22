@@ -130,9 +130,9 @@ install_vanilla('solariscoin','https://github.com/solariscoin/solariscoin','sola
 install_vanilla('veltor','https://github.com/veltor/veltor-old','veltord',6041,8041);
 install('chaincoin','https://github.com/chaincoin/chaincoin','chaincoind',6051,8051);
 install_vanilla('joincoin','https://github.com/pallas1/joincoin','joincoind',6061,8061,'-addnode=drtevq326tweby2k.onion:17941 -addnode=bfyswf2wu5ofqxyb.onion:17941 -addnode=gdhtrc7qoh3qowvf.onion:17941 -addnode=jzxs646bc3rajr3u.onion:17941 -addnode=p44az425ct7rhen6.onion:17941 -addnode=eldi5al5je6gw24u.onion:17941 -addnode=53zy47p5wly5penk.onion:17941 -addnode=vcn4cz4mhs4acnqd.onion:17941','groestle');
-subprocess.call('mkdir ~/.joincoin',shell=True);
+#subprocess.call('mkdir ~/.joincoin',shell=True);
 
-#install_vanilla('signatum','https://github.com/signatumd/source','signatumd',6071,8071); --verified broken
+install_vanilla('altcommunity','https://github.com/altcommunitycoin/altcommunitycoin-skunk/','altcommunitycoind',6071,8071);
 install_vanilla('boatcoin','https://github.com/OBAViJEST/boatcoinfinal','doubloond',6081,8081);
 
 
@@ -147,8 +147,13 @@ install('sibcoin','https://github.com/ivansib/sibcoin','sibcoind',6151,8151,'');
 install('digibyte','https://github.com/digibyte/digibyte','digibyted',6161,8161,'',getwork_patch='digibyte'); #not tested
 install('verge','https://github.com/vergecurrency/VERGE','VERGEd',6171,8171); #need to download blockchain manually
 
+install('bitsend','https://github.com/LIMXTEC/BitSend','bitsendd',6181,8181,getwork_patch='btc'); #need to download blockchain manually
+install_vanilla('hshare','https://github.com/HcashOrg/Hshare','hshared',6191,8191);
+#install('solaris-xevan','https://github.com/Solaris-Project/Solaris','solarisd',6201,8201);
+
 run_file=open('run_wallet.sh','w');
 for command in wallet_commands:
+	print(command);
 	run_file.write(command+'\n');
 run_file.close();
 subprocess.call('chmod +x ./run_wallet.sh',shell=True);
