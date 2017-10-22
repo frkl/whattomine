@@ -58,6 +58,8 @@ git clone https://github.com/tpruvot/ccminer ccminer-tpruvot
 cd ccminer-tpruvot;./build.sh;cd ..
 git clone https://github.com/alexis78/ccminer ccminer-alexis
 cd ccminer-alexis;./build.sh;cd ..
+git clone https://github.com/krnlx/ccminer-xevan ccminer-krnlx
+cd ccminer-krnlx;./build.sh;cd ..
 cd ..
 ```
 
