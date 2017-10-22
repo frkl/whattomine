@@ -1,7 +1,7 @@
 # whattomine
 Simple switch mining script.
 
-Mainly supports aur, spr, log, xlr, chc, vlt, boat and j.
+Mainly supports aur, boat, bsd, chc, dgb, ftc, grs, hsr, j, log, mac, sib, vlt, xlr, xvg.
 
 Intended for hobby mining only.
 
@@ -45,7 +45,7 @@ The code will download and compile all wallets and in the end generate run_walle
 ./wallet/run_wallet.sh
 ```
 
-Quite a few coins use new bitcoin code and have dropped support for getwork which ccminer uses for solo-mining. I have developed patches that add getwork back to the code for some of the coins. I have successfully mined blocks for GRS and SIB. But some others like VTC, MONA, LBC and DGB are still being tested. 
+Quite a few coins use new bitcoin code and have dropped support for getwork which ccminer uses for solo-mining. I have developed patches that add getwork back to some of those coins. I have successfully mined blocks for MAC, GRS, SIB, BSD and DGB. But some others like VTC, MONA, LBC and are still being tested. 
 
 ## Install miners
 
@@ -65,7 +65,9 @@ You may also use other ccminer forks, as well as closed source miners if config.
 
 ## Configure the profit switch script
 
-Update exchange addresses with your addresses in config.py. You may also update my hashrates with your actual hashrates, modify which coins you are mining, what username and password you are using for the wallets (need to be consistent with wallet/run_wallet.sh).
+Important: update exchange addresses with your addresses in config.py. 
+
+You may also update my hashrates with your actual hashrates (config_1080Ti, config_1080 and config_1070 has examples of 4 cards hashrates), modify which coins you are mining, what username and password you are using for the wallets (need to be consistent with wallet/run_wallet.sh).
 
 Make sure the wallets are running, and then run
 ```
