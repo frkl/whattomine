@@ -126,8 +126,8 @@ multi_algo['verge']=['groestl','lyra2rev2','x17']
 install_vanilla('woodcoin','https://github.com/funkshelper/woodcoin','woodcoind',6001,8001);
 install('auroracoin','https://github.com/aurarad/Auroracoin','auroracoind',6011,8011);
 install_vanilla('spreadcoin','https://github.com/spreadcoin/spreadcoin','spreadcoind',6021,8021);
-install_vanilla('solariscoin','https://github.com/solariscoin/solariscoin','solariscoind',6031,8031);
-install_vanilla('veltor','https://github.com/veltor/veltor-old','veltord',6041,8041);
+install_vanilla('solariscoin','https://github.com/solariscoin/solariscoin','solariscoind',6031,8031,'  -addnode=113.66.62.137 -addnode=115.79.5.135 -addnode=122.57.182.27 -addnode=138.68.108.250 -addnode=139.167.4.225 -addnode=139.167.5.218 -addnode=145.249.247.99 -addnode=145.255.141.116 -addnode=146.185.135.35 -addnode=151.18.108.170 -addnode=151.18.65.168 ');
+install_vanilla('veltor','https://github.com/veltor/veltor-old','veltord',6041,8041,' -addnode=2a01:4f8:201:6211::2101 -addnode=78.94.32.195 -addnode=2001:41d0:8:250e:: -addnode=veltor.suprnova.cc -addnode=178.33.228.14 -addnode=144.76.237.39 ');
 install('chaincoin','https://github.com/chaincoin/chaincoin','chaincoind',6051,8051);
 install_vanilla('joincoin','https://github.com/pallas1/joincoin','joincoind',6061,8061,'-addnode=drtevq326tweby2k.onion:17941 -addnode=bfyswf2wu5ofqxyb.onion:17941 -addnode=gdhtrc7qoh3qowvf.onion:17941 -addnode=jzxs646bc3rajr3u.onion:17941 -addnode=p44az425ct7rhen6.onion:17941 -addnode=eldi5al5je6gw24u.onion:17941 -addnode=53zy47p5wly5penk.onion:17941 -addnode=vcn4cz4mhs4acnqd.onion:17941','groestle');
 #subprocess.call('mkdir ~/.joincoin',shell=True);
@@ -149,7 +149,7 @@ install('verge','https://github.com/vergecurrency/VERGE','VERGEd',6171,8171); #n
 
 install('bitsend','https://github.com/LIMXTEC/BitSend','bitsendd',6181,8181,getwork_patch='btc'); #need to download blockchain manually
 install_vanilla('hshare','https://github.com/HcashOrg/Hshare','hshared',6191,8191);
-#install('solaris-xevan','https://github.com/Solaris-Project/Solaris','solarisd',6201,8201);
+install('solaris-xevan','https://github.com/frkl/Solaris','solarisd',6201,8201);
 
 run_file=open('run_wallet.sh','w');
 for command in wallet_commands:

@@ -381,7 +381,7 @@ class exchange:
 				if n==0:
 					yobit_url=yobit_url+m[1];
 				else:
-					yobit_url=yobit_url+'_'+m[1];
+					yobit_url=yobit_url+'-'+m[1];
 				n=n+1;
 		
 		print(yobit_url);
