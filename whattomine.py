@@ -118,13 +118,13 @@ class wallet:
 									#Does not really work for coins with dev fees
 									reward=sum([vout['value'] for vout in tx['vout']]);
 									if self.name=='chc':
-										reward=reward/8.0*5.2;
+										reward=reward/8.0*4.4;
 									elif self.name=='sib':
 										reward=reward/2.0;
 									elif self.name=='bsd':
 										reward=reward/5.0; #25->5
 									elif self.name=='xlrx':
-										reward=reward/2.0*1.6; #2->1.6
+										reward=reward/2.0*1.4; #2->1.4
 									self.reward_history.append((i,reward));
 									if len(self.reward_history)>self.reward_history_limit:
 										self.reward_history.pop(0);
