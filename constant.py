@@ -42,6 +42,7 @@ algo_lookup['myr']=['groestl','skein'];
 algo_lookup['xzc']='lyra2z';
 algo_lookup['altcom']='skunk';
 algo_lookup['hsr']='hsr';
+algo_lookup['lux']='phi';
 
 
 
@@ -79,6 +80,7 @@ wallets_key['xvg']='VERGE';
 wallets_key['xzc']='zcoin';
 wallets_key['altcom']='altcommunity';
 wallets_key['hsr']='hshare';
+wallets_key['lux']='Lux';
 
 #Exchange
 exchange=dict();
@@ -113,13 +115,14 @@ exchange['btx']=['cryptopia','BTX/BTC']
 exchange['xre']=['cryptopia','XRE/BTC']
 exchange['mac']=['cryptopia','MAC/BTC']
 exchange['hsr']=['cryptopia','HSR/BTC']
+exchange['lux']=['cryptopia','LUX/BTC']
 exchange['log']=['ccex','log-btc']
 exchange['vlt']=['yobit','vlt_btc']
-exchange['boat']=['nova','BTC_BOAT']
-exchange['sigt']=['nova','BTC_SIGT']
-exchange['j']=['nova','BTC_J']
+exchange['boat']=['tradesatoshi','BOAT_BTC']
+exchange['sigt']=['coinmarketcap','signatum']
+exchange['j']=['tradesatoshi','J_BTC']
 exchange['bntly']=['','']; #no exchange available
-exchange['altcom']=['','']; #no exchange available
+exchange['altcom']=['yobit','altcom_btc']; #no exchange available
 
 def alias(orig,see,replace,name='',cond=''):
 	if orig==see and name==cond:

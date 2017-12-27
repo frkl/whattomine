@@ -124,7 +124,7 @@ class wallet:
 									elif self.name=='bsd':
 										reward=reward/5.0; #25->5
 									elif self.name=='xlrx':
-										reward=reward/2.0*1.4; #2->1.4
+										reward=reward/2.0*1.6; #2->1.6
 									self.reward_history.append((i,reward));
 									if len(self.reward_history)>self.reward_history_limit:
 										self.reward_history.pop(0);
@@ -268,6 +268,7 @@ class exchange:
 	coins=dict();
 	tickers=dict();
 	bittrex_api='https://bittrex.com/api/v1.1/public/getmarketsummaries'
+	tradesatoshi_api='https://tradesatoshi.com/api/public/getmarketsummaries'
 	poloniex_api='https://poloniex.com/public?command=returnTicker';
 	ccex_api='https://c-cex.com/t/prices.json';
 	cryptopia_api='https://www.cryptopia.co.nz/api/GetMarkets';
@@ -371,6 +372,19 @@ class exchange:
 					self.tickers[coin]=float(ticker[0]['price_btc']);
 				except:
 					print('Exchange: error getting %s price from coinmarketcap'%coin);
+		
+		#Tradesatoshi
+		try:
+			r=requests.get(self.tradesatoshi_api,timeout=5);
+			tickers=json.loads(r.content);
+			for t in tickers['result']:
+				if ('tradesatoshi',t['market']) in tocoin:
+					c=tocoin[('tradesatoshi',t['market'])];
+					self.tickers[c]=t['bid'];
+			
+		except:
+			print('Exchange: error getting price from tradesatoshi');
+		
 		
 		#Yobit
 		#First craft the url

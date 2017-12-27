@@ -1,6 +1,6 @@
 #-----------------WALLETS-----------------
 #Assuming username/password are the same for all wallets
-#This is my rpc username/password, Change them to yours. As long as you don't make rpc port public it should be safe.
+#This is my username/password, Change them to yours
 wallet_username='grrr';
 wallet_password='13457';
 
@@ -27,23 +27,24 @@ remote_wallets=dict();
 #Remove lines coins which you are not sending to exchanges or you wish to do so manually
 #TODO: Change my exchange addresses to your exchange addresses
 exchange_addr=dict();
-exchange_addr['aur']='AHNs7BiKkyUzQDgeomRoYxGoekBfGCeQbn'
-exchange_addr['orb']='oYMJbeLdpMf5TBoYTF1JQ7Ahbi3bqMSKpL'
-exchange_addr['dgb']='DMHTQ5MJoYgMRSk3XeL5frmpujDpwtmip1'
+exchange_addr['aur']='ASqG874uv2PCo64AZhqR4uU1xopFbzGePa'
+exchange_addr['orb']='oWrBy3xB2EAL6DcwCPz3bDCtkFcWG1dKqR'
+exchange_addr['dgb']='DAVbWb3Ao72CkumCwaJLnPJYqxpn41F7qd'
 exchange_addr['chc']='CYa38GJZbW6oq9cNT3GhtSUfafYFXEKVKV'
 exchange_addr['skc']='Sj5NefeFu85A7K9nyKm3HkM5ir4zm6ZGDP'
-exchange_addr['xvg']='D7gdSJaPSF7p4MqXh8ioWNtHD7UhApPLK2'
-exchange_addr['spr']='SVihb9U6aeegNqxFAiEXGjvuG5VvDz4uov'
-exchange_addr['j']='JeHuqWdCoYRgW4b9cuEzgLuLjDdXSQA6qU'
+exchange_addr['xvg']='DDAXvooye47NhbygoC418Hyw8CrMGmHH1m'
+exchange_addr['spr']='SQgL2kP26jxACNFiDiiLkFyLEwSjMuPwRH'
+exchange_addr['j']='JdXaXyxudbPsjxX6kyU5qW37j5odvWtk6P'
 exchange_addr['log']='WR3EKWvGWkg9MNsR1Nknvk6iHM5MUW2f6i'
 exchange_addr['vlt']='VbueM3wkqhVsjfm57XmHBTNAmmLgAwU1kF'
-exchange_addr['ftc']='72PUW7PT5L5aJJPW7LrngXi98xDTQWEsag'
-exchange_addr['boat']='BJUVhBYnFDu3rpsWWE7bjfyXS5SRWPfFxP'
-exchange_addr['grs']='FtFnpTRbERVQWoSGdhn3YXpd8asVfSBfTJ'
-exchange_addr['bsd']='iFnZWzmdLBM6Pxrq8eH1GZsR9XHsG54tfN'
+exchange_addr['ftc']='6pnrgffpoWsDp6Uf4C5gTvLGqcdbgmAYvS'
+exchange_addr['boat']='BLihpqwt8wGPYLnFS7r3V1kC47qscXyDtc'
+exchange_addr['grs']='FX7G6oaDMvvKyuZrDPF9UWzvgiJRhKDc1B'
+exchange_addr['bsd']='iQFX64efzJwNZ5DjPHmXeXHhc3T3RXopzh'
 exchange_addr['mac']='MREqeDeaMqhnUqF2WAcyH9tbzDJsPLhiG6'
-exchange_addr['sib']='Sdx9cMycThX1jnLeQYTp3P1ZEr1HEz9BUj'
-exchange_addr['bsd']='iFnZWzmdLBM6Pxrq8eH1GZsR9XHsG54tfN'
+exchange_addr['sib']='SZRS3oGYCzmvPnv28t8KapVBofEaecKnaG'
+exchange_addr['xlr']='sMvt4bTZyWHYo8MfkMMCNjr2dq9YvoV8oh'
+exchange_addr['xlrx']='SbMNqBPPt63uaVBr33jCwQutKpPqmcq4Go'
 
 
 
@@ -66,7 +67,7 @@ hashrate['spread']=44.5							#sp-spread
 hashrate['nist5']=340							#alexis
 hashrate['whirl']=330							#alexis
 hashrate['luffa']=1920							#tpruvot
-hashrate['penta']=690							#tpruvot 
+hashrate['penta']=760							#sp-penta 
 hashrate['bastion']=76.5						#tpruvot 
 hashrate['keccak']=5400							#alexis
 hashrate['x15']=79								#alexis
@@ -93,11 +94,13 @@ hashrate['m7']=0
 hashrate['pascal']=0
 hashrate['bitcore']=104							#tpruvot
 hashrate['hsr']=60							#tpruvot
+hashrate['phi']=130							#tpruvot
 
 #Wallet miners (algo,stratum,user,pass)
 alexis='./miner/ccminer-alexis/ccminer -a %s -o %s -u %s -p %s'
 tpruvot='./miner/ccminer-tpruvot/ccminer -a %s -o %s -u %s -p %s'
 spread='wine ./miner/ccminer-sp-spread9/spreadminer.exe %.0s -o %s -u %s -p %s'
+penta='wine ./miner/ccminer-sp-penta/ccminer.exe -a %s -o %s -u %s -p %s'
 krnlx='./miner/ccminer-krnlx-xevan/ccminer -a %s -o %s -u %s -p %s'
 
 #Specify which (coin,algorithm,miner) you use for wallet mining
@@ -107,14 +110,14 @@ krnlx='./miner/ccminer-krnlx-xevan/ccminer -a %s -o %s -u %s -p %s'
 #Or you'll encounter errors
 I_wallet_mine=list();
 I_wallet_mine.append(['log','skein2',alexis,'-i 27.13']);
-#I_wallet_mine.append(['aur','myr-gr',alexis.'-i 23.13']);
-#I_wallet_mine.append(['aur','skein',alexis,'-i 23.13']);
+I_wallet_mine.append(['aur','myr-gr',alexis,'-i 23.13']);
+I_wallet_mine.append(['aur','skein',alexis,'-i 23.13']);
 I_wallet_mine.append(['spr','spread',spread,' -x 15']);
 I_wallet_mine.append(['chc','c11',alexis,'-i 22']);
-I_wallet_mine.append(['xlr','nist5',alexis,'-i 21.13']);
+#I_wallet_mine.append(['xlr','nist5',alexis,'-i 21.13']);
 I_wallet_mine.append(['vlt','veltor',alexis,'-i 25.13']);
 I_wallet_mine.append(['boat','hmq1725',tpruvot,'-i 19.13']);
-I_wallet_mine.append(['j','myr-gr',alexis,'-i 23.13']);
+I_wallet_mine.append(['j','penta',penta]);
 I_wallet_mine.append(['sib','sib',alexis,'-i 22.13']);
 I_wallet_mine.append(['lbc','lbry',alexis,'-i 28.13']);
 I_wallet_mine.append(['grs','groestl',tpruvot,'-i 19.13']);
@@ -124,11 +127,12 @@ I_wallet_mine.append(['vtc','lyra2v2',alexis,'-i 22.13']);
 I_wallet_mine.append(['mona','lyra2v2',alexis,'-i 22.13']);
 I_wallet_mine.append(['dgb','myr-gr',alexis,'-i 23.13']);
 I_wallet_mine.append(['dgb','skein',alexis,'-i 27.13']);
-#I_wallet_mine.append(['xvg','myr-gr',alexis,'-i 23.13']);
+I_wallet_mine.append(['xvg','myr-gr',alexis,'-i 23.13']);
 #I_wallet_mine.append(['xvg','x17',alexis]);
-#I_wallet_mine.append(['xvg','lyra2v2',alexis,'-i 22.13']);
+I_wallet_mine.append(['xvg','lyra2v2',alexis,'-i 22.13']);
 I_wallet_mine.append(['bsd','xevan',krnlx,'-i 20.13']);
 I_wallet_mine.append(['xlrx','xevan',krnlx,'-i 20.13']);
+#I_wallet_mine.append(['lux','phi',tpruvot]);
 
 
 #Pool miners
