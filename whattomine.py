@@ -37,6 +37,13 @@ class wallet:
 		self.reward_history=list();
 		self.difficulty=dict();
 	
+	def is_synced(self):
+		try:
+			info=self.access.getwork();
+			return True;
+		except:
+			return False;
+	
 	def getDifficulty(self,algo=''):
 		try:
 			if algo=='':
@@ -124,7 +131,7 @@ class wallet:
 									elif self.name=='bsd':
 										reward=reward/5.0; #25->5
 									elif self.name=='xlrx':
-										reward=reward/2.0*1.6; #2->1.6
+										reward=reward/2.0*1.4; #2->1.4
 									self.reward_history.append((i,reward));
 									if len(self.reward_history)>self.reward_history_limit:
 										self.reward_history.pop(0);
@@ -477,8 +484,13 @@ class miners:
 			for p in m['pairs']:
 				hashrate=p[2];
 				try:
-					diff=wallets.wallets[p[0]].getDifficulty(p[1]);
-					block_reward=wallets.wallets[p[0]].getReward();
+					if wallets.wallets[p[0]].is_synced():
+						diff=wallets.wallets[p[0]].getDifficulty(p[1]);
+						block_reward=wallets.wallets[p[0]].getReward();
+					else:
+						diff=-1;
+						block_reward=0;
+					#
 				except:
 					#wallet does not exist
 					diff=-1;
