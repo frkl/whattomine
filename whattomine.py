@@ -171,6 +171,9 @@ class whattomine:
 		except:
 			return 1e10;
 	
+	def is_synced(self):
+		return True;
+	
 	def getReward(self):
 		return self.reward;
 	
