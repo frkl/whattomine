@@ -4,33 +4,7 @@ Simple switch mining script.
 List of supported coins
 
 ```
-log
-aur
-spr
-orb
-vlt
-chc
-j
-altcom
-boat
-grs
-ftc
-mac
-mona
-flax
-lbc
-sib
-dgb
-bsd
-hsr
-xlr
-bern
-max
-xre
-btx
-dnr
-tzc
-crea
+log, aur, spr, orb, vlt, chc, j, altcom, boat, grs, ftc, mac, mona, flax, lbc, sib, dgb, bsd, hsr, xlr, bern, max, xre, btx, dnr, tzc, crea
 ```
 
 For hobby mining only.
