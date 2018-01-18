@@ -1,9 +1,39 @@
 # whattomine
 Simple switch mining script.
 
-Mainly supports aur, boat, bsd, chc, dgb, ftc, grs, hsr, j, log, mac, sib, vlt, xlr, xvg.
+List of supported coins
 
-Intended for hobby mining only.
+```
+log
+aur
+spr
+orb
+vlt
+chc
+j
+altcom
+boat
+grs
+ftc
+mac
+mona
+flax
+lbc
+sib
+dgb
+bsd
+hsr
+xlr
+bern
+max
+xre
+btx
+dnr
+tzc
+crea
+```
+
+For hobby mining only.
 
 
 ## Install dependencies
@@ -49,7 +79,7 @@ Quite a few coins use new bitcoin code and have dropped support for getwork whic
 
 ## Install miners
 
-For miners I personally use open source ccminer forks by [tpruvot](https://github.com/tpruvot/ccminer) and [alexis78](https://github.com/alexis78). Please donate to the authors to keep open source mining going.
+For miners use open source ccminer forks by [tpruvot](https://github.com/tpruvot), [alexis78](https://github.com/alexis78), [krnlx](https://github.com/krnlx) for xevan and [djm34](https://github.com/djm34) for lyra2z. Please donate to the authors to keep open source mining going.
 
 ```
 mkdir miner
@@ -60,6 +90,8 @@ git clone https://github.com/alexis78/ccminer ccminer-alexis
 cd ccminer-alexis;./build.sh;cd ..
 git clone https://github.com/krnlx/ccminer-xevan ccminer-krnlx
 cd ccminer-krnlx;./build.sh;cd ..
+git clone https://github.com/djm34/ccminer-msvc2015 ccminer-djm34
+cd ccminer-djm34;./autogen.sh;./configure.sh;make -j8;cd ..
 cd ..
 ```
 
@@ -69,7 +101,7 @@ You may also use other ccminer forks, as well as closed source miners if config.
 
 Important: update exchange addresses with your addresses in config.py. 
 
-You may also update my hashrates with your actual hashrates (config_1080Ti, config_1080 and config_1070 has examples of 4 cards hashrates), modify which coins you are mining, what username and password you are using for the wallets (need to be consistent with wallet/run_wallet.sh).
+You may also update hashrates of cards with your actual hashrates (config_1080Ti, config_1080 and config_1070 has examples of 4 cards hashrates), modify which coins you are mining, what username and password you are using for the wallets (need to be consistent with wallet/run_wallet.sh).
 
 Make sure the wallets are running, and then run
 ```
