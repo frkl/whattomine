@@ -126,11 +126,13 @@ class wallet:
 									reward=sum([vout['value'] for vout in tx['vout']]);
 									if self.name=='chc':
 										reward=reward/8.0*4.4;
+									elif self.name=='flax':
+										reward=reward/0.71*0.48;
 									elif self.name=='sib':
 										reward=reward/2.0;
 									elif self.name=='bsd':
 										reward=reward/5.0; #25->5
-									elif self.name=='xlrx':
+									elif self.name=='xlr':
 										reward=reward/2.0*1.4; #2->1.4
 									self.reward_history.append((i,reward));
 									if len(self.reward_history)>self.reward_history_limit:
@@ -408,7 +410,6 @@ class exchange:
 					yobit_url=yobit_url+'-'+m[1];
 				n=n+1;
 		
-		print(yobit_url);
 		#Now query website
 		if n>0:
 			try:

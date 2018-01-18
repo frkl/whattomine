@@ -19,8 +19,7 @@ algo_lookup['log']='skein2';
 algo_lookup['spr']='spread';
 algo_lookup['xvg']=['x17','lyra2v2','myr-gr'];
 algo_lookup['chc']='c11';
-algo_lookup['xlr']='nist5';
-algo_lookup['xlrx']='xevan';
+algo_lookup['xlr']='xevan';
 algo_lookup['vlt']='veltor';
 algo_lookup['sigt']='skunk';
 algo_lookup['boat']='hmq1725';
@@ -43,6 +42,12 @@ algo_lookup['xzc']='lyra2z';
 algo_lookup['altcom']='skunk';
 algo_lookup['hsr']='hsr';
 algo_lookup['lux']='phi';
+algo_lookup['bern']='x14';
+algo_lookup['max']='keccak';
+algo_lookup['flax']='c11';
+algo_lookup['dnr']='tribus';
+algo_lookup['tzc']='neoscrypt';
+algo_lookup['crea']='keccakc';
 
 
 
@@ -56,8 +61,7 @@ wallets_key['aur']='auroracoin';
 wallets_key['log']='woodcoin';
 wallets_key['spr']='spreadcoin';
 wallets_key['chc']='chaincoin';
-wallets_key['xlr']='solariscoin';
-wallets_key['xlrx']='solariscoin-xevan';
+wallets_key['xlr']='solaris';
 wallets_key['vlt']='Veltor';
 wallets_key['sigt']='signatum';
 wallets_key['boat']='doubloon';
@@ -81,6 +85,12 @@ wallets_key['xzc']='zcoin';
 wallets_key['altcom']='altcommunity';
 wallets_key['hsr']='hshare';
 wallets_key['lux']='Lux';
+wallets_key['bern']='BERN';
+wallets_key['max']='maxcoin';
+wallets_key['flax']='flaxscript';
+wallets_key['tzc']='trezarcoin';
+wallets_key['dnr']='denarius';
+wallets_key['crea']='creativecoin';
 
 #Exchange
 exchange=dict();
@@ -108,7 +118,6 @@ exchange['bsd']=['bittrex','BTC-BSD']
 exchange['sib']=['bittrex','BTC-SIB']
 exchange['myr']=['bittrex','BTC-MYR']
 exchange['xlr']=['coinmarketcap','solaris']
-exchange['xlrx']=['coinmarketcap','solaris']
 exchange['chc']=['cryptopia','CHC/BTC']
 exchange['orb']=['cryptopia','ORB/BTC']
 exchange['btx']=['cryptopia','BTX/BTC']
@@ -122,7 +131,13 @@ exchange['boat']=['tradesatoshi','BOAT_BTC']
 exchange['sigt']=['coinmarketcap','signatum']
 exchange['j']=['tradesatoshi','J_BTC']
 exchange['bntly']=['','']; #no exchange available
-exchange['altcom']=['yobit','altcom_btc']; #no exchange available
+exchange['altcom']=['yobit','altcom_btc'];
+exchange['bern']=['cryptopia','BERN/BTC'];
+exchange['max']=['yobit','max_btc'];
+exchange['flax']=['cryptopia','FLAX/BTC'];
+exchange['tzc']=['cryptopia','TZC/BTC'];
+exchange['dnr']=['cryptopia','DNR/BTC'];
+exchange['crea']=['cryptopia','CREA/BTC'];
 
 def alias(orig,see,replace,name='',cond=''):
 	if orig==see and name==cond:
