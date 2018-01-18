@@ -49,7 +49,7 @@ The code will download and compile all wallets and in the end generate run_walle
 ./wallet/run_wallet.sh
 ```
 
-Quite a few coins use new bitcoin code and have dropped support for getwork which ccminer uses for solo-mining. I have developed patches that add getwork back to some of those coins. I have successfully mined blocks for MAC, GRS, SIB, BSD and DGB. But some others like VTC, MONA, LBC and are still being tested. 
+Quite a few coins use new bitcoin code and have dropped support for getwork which ccminer uses for solo-mining. I have developed patches that add getwork back to some of those coins. Getwork mining is tested for MAC, GRS, SIB, BSD, DGB, XLR. But some others like BTX, CREA, VTC, MONA and LBC are still being tested. 
 
 ## Install miners
 
