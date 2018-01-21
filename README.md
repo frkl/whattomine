@@ -117,4 +117,13 @@ python test_miners.py
 
 to check if miners are able to mine into those wallets or not.
 
+Use
+
+```
+python generate_report.py
+```
+
+to keep a snapshot of how many coins has been generated till this day by the current wallets. 
+Daily coin price history recording is still being developed. The goal is to be able to keep wallet mining earning records for tax purposes.
+
 Hopefully this gives you a reason to buy cards for deep learning.
