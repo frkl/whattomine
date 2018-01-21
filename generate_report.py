@@ -30,6 +30,7 @@ except:
 
 
 result=[];
+err=False;
 for port in config.scan_ports:
 	access=ServiceProxy({'url':config.scan_api%port,'username':config.wallet_username,'password':config.wallet_password},timeout=5);
 	try:
@@ -49,11 +50,14 @@ for port in config.scan_ports:
 				except:
 					print('Error reading wallet %s at port %d'%(coin,port));
 					print('Could not generate report');
-					raise;
+					err=True;
 					#error in reading wallet, very bad.
 		#
 	except:
 		pass;
+
+if err:
+	raise;
 
 fname='report/generation_report_%d.json'%(time.time());
 f=open(fname,'w');
