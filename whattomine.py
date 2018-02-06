@@ -133,7 +133,7 @@ class wallet:
 									elif self.name=='bsd':
 										reward=reward/5.0; #25->5
 									elif self.name=='xlr':
-										reward=reward/2.0*1.4; #2->1.4
+										reward=reward/2.0*1.0; #2->1.0
 									self.reward_history.append((i,reward));
 									if len(self.reward_history)>self.reward_history_limit:
 										self.reward_history.pop(0);
