@@ -3,6 +3,7 @@ import requests
 import json
 import time
 import sys
+import socket
 
 update_exchange_every=600;
 update_wallet_full_every=600;
@@ -66,14 +67,14 @@ while True:
 		miners.load('config/miner.json');
 		miners.compute_profitability(wallets,exchange);
 		miners.switch(wallets,exchange);
-		#Print basic stats
 		try:
 			coindesk_request=requests.get("http://api.coindesk.com/v1/bpi/currentprice/usd.json",timeout=5);
 			coindesk_btc=json.loads(coindesk_request.content);
 			btc_usd=coindesk_btc['bpi']['USD']['rate_float'];
 		except:
 			print('failed to get btc price');
-
+		
+		#Print basic stats
 		print('BTC: %f'%(btc_usd))
 		print('Profitability:')
 		for l in miners.general_profitability:
@@ -86,5 +87,23 @@ while True:
 		print('Most profitable: %s\treward %f\tamount %f\ttimestamp %lu'%(miners.current['name'],miners.current['expected_reward_btc']*btc_usd,miners.current['expected_reward'][0][1],miners.current['time']));
 		print('\n\n\n')
 		sys.stdout.flush();
+		
+		#Check internet status
+		net_connected='On';
+		try:
+			s=socket.create_connection(('8.8.8.8',53),1);
+			net_connected='On';
+		except:
+			net_connected='Off';
+		
+		#keep a log of stats
+		fname='report/switch_time%lue7.log'%int(miners.current['time']/10000000);
+		try:
+			f=open(fname,'a');
+			f.write('\n')
+			f.write('%s\t%f\t%f\t%lu\t%s\tverified'%(miners.current['name'],miners.current['expected_reward_btc']*btc_usd,miners.current['expected_reward'][0][1],miners.current['time'],net_connected));
+			f.close();
+		except:
+			pass;
 	
 	time.sleep(1);
