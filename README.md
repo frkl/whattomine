@@ -124,6 +124,12 @@ python generate_report.py
 ```
 
 to keep a snapshot of how many coins has been generated till this day by the current wallets. 
-Daily coin price history recording is still being developed. The goal is to be able to keep wallet mining earning records for tax purposes.
+
+The lastest version brings automatic price and mining history recording in main.py. An experimental reward calculation implementation is 
+
+```
+python mining_analysis.py
+```
+
 
 Hopefully this gives you a reason to buy cards for deep learning.
