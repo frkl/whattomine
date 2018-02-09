@@ -11,6 +11,7 @@ whattomine_lookup['zcl']={'name':'zcl','url':'https://www.whattomine.com/coins/1
 whattomine_lookup['kmd']={'name':'kmd','url':'https://www.whattomine.com/coins/174.json','algorithm':'eqhash'};
 whattomine_lookup['pasc']={'name':'pasc','url':'https://www.whattomine.com/coins/172.json','algorithm':'pascal'};
 whattomine_lookup['btx']={'name':'btx','url':'https://www.whattomine.com/coins/202.json','algorithm':'bitcore'};
+whattomine_lookup['btg']={'name':'btg','url':'https://www.whattomine.com/coins/214.json','algorithm':'eqhash'};
 
 #What algos a coin use.
 algo_lookup=dict();
@@ -20,7 +21,6 @@ algo_lookup['spr']='spread';
 algo_lookup['xvg']=['x17','lyra2v2','myr-gr'];
 algo_lookup['chc']='c11';
 algo_lookup['xlr']='xevan';
-algo_lookup['vlt']='veltor';
 algo_lookup['sigt']='skunk';
 algo_lookup['boat']='hmq1725';
 algo_lookup['mona']='lyra2v2';
@@ -48,6 +48,7 @@ algo_lookup['flax']='c11';
 algo_lookup['dnr']='tribus';
 algo_lookup['tzc']='neoscrypt';
 algo_lookup['crea']='keccakc';
+algo_lookup['btg']='eqhash';
 
 
 
@@ -62,7 +63,6 @@ wallets_key['log']='woodcoin';
 wallets_key['spr']='spreadcoin';
 wallets_key['chc']='chaincoin';
 wallets_key['xlr']='solaris';
-wallets_key['vlt']='Veltor';
 wallets_key['sigt']='signatum';
 wallets_key['boat']='doubloon';
 wallets_key['mona']='monacoin';
@@ -126,7 +126,6 @@ exchange['mac']=['cryptopia','MAC/BTC']
 exchange['hsr']=['cryptopia','HSR/BTC']
 exchange['lux']=['cryptopia','LUX/BTC']
 exchange['log']=['ccex','log-btc']
-exchange['vlt']=['yobit','vlt_btc']
 exchange['boat']=['tradesatoshi','BOAT_BTC']
 exchange['sigt']=['coinmarketcap','signatum']
 exchange['j']=['tradesatoshi','J_BTC']
@@ -138,6 +137,7 @@ exchange['flax']=['cryptopia','FLAX/BTC'];
 exchange['tzc']=['cryptopia','TZC/BTC'];
 exchange['dnr']=['cryptopia','DNR/BTC'];
 exchange['crea']=['cryptopia','CREA/BTC'];
+exchange['btg']=['yobit','btg_btc'];
 
 def alias(orig,see,replace,name='',cond=''):
 	if orig==see and name==cond:
@@ -145,13 +145,15 @@ def alias(orig,see,replace,name='',cond=''):
 	else:
 		return orig;
 
-def aliases(algo):
-	algo=alias(algo,'myr-gr','groestl');
+def aliases(algo,coin):
+	algo=alias(algo,'groestle','myr-gr','j',coin);
 	algo=alias(algo,'groestle','groestl');
-	algo=alias(algo,'myriad-groestl','groestl');
-	algo=alias(algo,'penta','pentablake');
-	algo=alias(algo,'whirl','whirlpool');
-	algo=alias(algo,'whirlpoolx','whirlpool');
+	algo=alias(algo,'myriad-groestl','myr-gr');
+	algo=alias(algo,'pentablake','penta');
+	algo=alias(algo,'whirlpool','whirl');
+	algo=alias(algo,'whirlpoolx','whirl');
 	algo=alias(algo,'lyra2re','lyra2v2');
 	algo=alias(algo,'lyra2rev2','lyra2v2');
+	algo=alias(algo,'blake2s','blake');
 	return algo;
+
