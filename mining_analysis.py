@@ -167,7 +167,7 @@ for i in range(0,len(expected)-1):
 
 print(result);
 print('1d');
-print('Wallet  \tExpected\tActual\tUtilization\tAverage Rate');
+print('Wallet  \tExpected\tActual\tUtilization(%)\tAverage Rate');
 usd=0;
 expected_usd=0;
 work=0;
@@ -176,12 +176,12 @@ for wallet in result:
 	expected_usd=expected_usd+result[wallet]['expected_usd_1d'];
 	work=work+result[wallet]['work_1d'];
 	print('%s \t%.02f\t\t%.02f\t%.02f\t\t%.02f'%(wallet,result[wallet]['expected_usd_1d'],result[wallet]['usd_1d'],result[wallet]['work_1d']*100/86400.0,result[wallet]['expected_usd_1d']/result[wallet]['work_1d']*86400));
-print('===========================')
+print('===============================================================')
 print('subtotal\t%.02f\t\t%.02f\t%.02f\t\t%.02f'%(expected_usd,usd,work*100/86400.0,expected_usd/work*86400));
 
 print('\n')
 print('7d');
-print('Wallet  \tExpected\tActual\tUtilization');
+print('Wallet  \tExpected\tActual\tUtilization(%)\tAverage Rate');
 usd=0;
 expected_usd=0;
 work=0;
@@ -190,12 +190,12 @@ for wallet in result:
 	expected_usd=expected_usd+result[wallet]['expected_usd_7d'];
 	work=work+result[wallet]['work_7d'];
 	print('%s \t%.02f\t\t%.02f\t%.02f\t\t%.02f'%(wallet,result[wallet]['expected_usd_7d'],result[wallet]['usd_7d'],result[wallet]['work_7d']*100/86400.0/7,result[wallet]['expected_usd_7d']/result[wallet]['work_7d']*86400));
-print('===========================')
+print('===============================================================')
 print('subtotal\t%.02f\t\t%.02f\t%.02f\t\t%.02f'%(expected_usd,usd,work*100/86400.0/7,expected_usd/work*86400));
 
 print('\n')
 print('30d');
-print('Wallet  \tExpected\tActual\tUtilization');
+print('Wallet  \tExpected\tActual\tUtilization(%)\tAverage Rate');
 usd=0;
 expected_usd=0;
 work=0;
@@ -204,12 +204,12 @@ for wallet in result:
 	expected_usd=expected_usd+result[wallet]['expected_usd_30d'];
 	work=work+result[wallet]['work_30d'];
 	print('%s \t%.02f\t\t%.02f\t%.02f\t\t%.02f'%(wallet,result[wallet]['expected_usd_30d'],result[wallet]['usd_30d'],result[wallet]['work_30d']*100/86400.0/30,result[wallet]['expected_usd_30d']/result[wallet]['work_30d']*86400));
-print('===========================')
+print('===============================================================')
 print('subtotal\t%.02f\t\t%.02f\t%.02f\t\t%.02f'%(expected_usd,usd,work*100/86400.0/30,expected_usd/work*86400));
 
 print('\n')
 print('365d');
-print('Wallet  \tExpected\tActual\tUtilization');
+print('Wallet  \tExpected\tActual\tUtilization(%)\tAverage Rate');
 usd=0;
 expected_usd=0;
 work=0;
@@ -218,5 +218,5 @@ for wallet in result:
 	expected_usd=expected_usd+result[wallet]['expected_usd_365d'];
 	work=work+result[wallet]['work_365d'];
 	print('%s \t%.02f\t\t%.02f\t%.02f\t\t%.02f'%(wallet,result[wallet]['expected_usd_365d'],result[wallet]['usd_365d'],result[wallet]['work_365d']*100/86400.0/365,result[wallet]['expected_usd_365d']/result[wallet]['work_365d']*86400));
-print('===========================')
+print('===============================================================')
 print('subtotal\t%.02f\t\t%.02f\t%.02f\t\t%.02f'%(expected_usd,usd,work*100/86400.0/365,expected_usd/work*86400));
