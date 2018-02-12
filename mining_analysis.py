@@ -148,24 +148,22 @@ for i in range(0,len(expected)-1):
 			result[data['wallet']]['work_30d']=1e-7;
 			result[data['wallet']]['work_365d']=1e-7;
 		#
+		work=expected[i+1]['time']-expected[i]['time'];
+		if work>300:
+			work=0;
 		if data['time']>tx-86400:
-			work=expected[i+1]['time']-expected[i]['time'];
 			result[data['wallet']]['work_1d']+=work;
 			result[data['wallet']]['expected_usd_1d']+=data['usd_24h']*work/86400.0;
 		if data['time']>tx-7*86400:
-			work=expected[i+1]['time']-expected[i]['time'];
 			result[data['wallet']]['work_7d']+=work;
 			result[data['wallet']]['expected_usd_7d']+=data['usd_24h']*work/86400.0;
 		if data['time']>tx-30*86400:
-			work=expected[i+1]['time']-expected[i]['time'];
 			result[data['wallet']]['work_30d']+=work;
 			result[data['wallet']]['expected_usd_30d']+=data['usd_24h']*work/86400.0;
 		if data['time']>tx-365*86400:
-			work=expected[i+1]['time']-expected[i]['time'];
 			result[data['wallet']]['work_365d']+=work;
 			result[data['wallet']]['expected_usd_365d']+=data['usd_24h']*work/86400.0;
 
-print(result);
 print('1d');
 print('Wallet  \tExpected\tActual\tUtilization(%)\tAverage Rate');
 usd=0;
