@@ -40,7 +40,6 @@ I have mostly streamlined wallet installation in install_wallet.py.
 
 ```
 python install_wallet.py
-cd ..
 ```
 The code will download and compile all wallets. Wallet blockchain and wallet.dat are stored in ./wallet-data for convenience.
 
