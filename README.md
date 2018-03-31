@@ -4,7 +4,7 @@ Simple switch mining script.
 List of supported coins
 
 ```
-log, aur, spr, orb, vlt, chc, j, altcom, boat, grs, ftc, mac, mona, flax, lbc, sib, dgb, bsd, hsr, xlr, bern, max, xre, btx, dnr, tzc, crea
+log, aur, spr, orb, chc, j, grs, ftc, mac, mona, flax, lbc, sib, dgb, bsd, hsr, xlr, max, xre, btx, rvn, nort, ifx
 ```
 
 For hobby mining only.
@@ -39,17 +39,12 @@ export DYLD_LIBRARY_PATH=/usr/local/cuda/lib64/:/usr/local/cuda/lib/:/usr/local/
 I have mostly streamlined wallet installation in install_wallet.py.
 
 ```
-cd wallet/
 python install_wallet.py
 cd ..
 ```
-The code will download and compile all wallets and in the end generate run_wallet.sh which is a script that runs all wallets. Run it on boot every time.
+The code will download and compile all wallets. Wallet blockchain and wallet.dat are stored in ./wallet-data for convenience.
 
-```
-./wallet/run_wallet.sh
-```
-
-Quite a few coins use new bitcoin code and have dropped support for getwork which ccminer uses for solo-mining. I have developed patches that add getwork back to some of those coins. Getwork mining is tested for MAC, GRS, SIB, BSD, DGB, XLR. But some others like BTX, CREA, VTC, MONA and LBC are still being tested. 
+Quite a few coins use new bitcoin code and have dropped support for getwork which ccminer uses for solo-mining. I have developed patches that add getwork back to some of those coins, which is key to wallet mining using open source miners that doesn't support gbt.   
 
 ## Install miners
 
@@ -73,7 +68,7 @@ You may also use other ccminer forks, as well as closed source miners if config.
 
 ## Configure the profit switch script
 
-Important: update exchange addresses with your addresses in config.py. 
+Important: rename config_.py to config.py. Update exchange addresses with your addresses in config.py. 
 
 You may also update hashrates of cards with your actual hashrates (config_1080Ti, config_1080 and config_1070 has examples of 4 cards hashrates), modify which coins you are mining, what username and password you are using for the wallets (need to be consistent with wallet/run_wallet.sh).
 
@@ -87,13 +82,29 @@ Those commands will automatically scan which wallets are currently running throu
 
 ## Run
 
-Make sure all wallets are running and synced. Then use 
+First launch all wallets by running
 
 ```
-python main.py | tee log.txt
+python run_wallet.py
 ```
 
-to run the program.
+Wallet might take quite some time to sync up, especially for the first time. Once all wallets are running, use 
+
+```
+python main.py
+```
+
+to start the mining script.
+
+## Monitor
+
+For reward calculation, run 
+
+```
+python mining_analysis.py
+```
+
+to monitor mining history and efficiency.
 
 Use 
 
@@ -116,20 +127,5 @@ python test_miners.py
 ```
 
 to check if miners are able to mine into those wallets or not.
-
-Use
-
-```
-python generate_report.py
-```
-
-to keep a snapshot of how many coins has been generated till this day by the current wallets. 
-
-The lastest version brings automatic price and mining history recording in main.py. An experimental reward calculation implementation is 
-
-```
-python mining_analysis.py
-```
-
 
 Hopefully this gives you a reason to buy cards for deep learning.
