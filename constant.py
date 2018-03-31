@@ -49,6 +49,9 @@ algo_lookup['dnr']='tribus';
 algo_lookup['tzc']='neoscrypt';
 algo_lookup['crea']='keccakc';
 algo_lookup['btg']='eqhash';
+algo_lookup['rvn']='x16r';
+algo_lookup['nort']='xevan';
+algo_lookup['ifx']='lyra2z';
 
 
 
@@ -91,6 +94,43 @@ wallets_key['flax']='flaxscript';
 wallets_key['tzc']='trezarcoin';
 wallets_key['dnr']='denarius';
 wallets_key['crea']='creativecoin';
+wallets_key['rvn']='Raven';
+wallets_key['nort']='northern';
+wallets_key['ifx']='Infinex';
+
+#executable names
+executable=dict();
+executable['log']='woodcoind';
+executable['aur']='auroracoind';
+executable['spr']='spreadcoind';
+executable['orb']='orbitcoind';
+executable['vlt']='veltord';
+executable['chc']='chaincoind';
+executable['j']='joincoind';
+executable['altcom']='altcommunitycoind';
+executable['boat']='doubloond';
+executable['grs']='groestlcoind';
+executable['ftc']='feathercoind';
+executable['mac']='machinecoind';
+executable['mona']='monacoind';
+executable['flax']='flaxscriptd';
+executable['lbc']='lbrycrdd';
+executable['sib']='sibcoind';
+executable['dgb']='digibyted';
+executable['bsd']='bitsendd';
+executable['hsr']='hshared';
+executable['xlr']='solarisd';
+executable['bern']='BERNd';
+executable['max']='maxcoind';
+executable['xre']='revolvercoind';
+executable['btx']='bitcored';
+executable['dnr']='denariusd';
+executable['tzc']='trezarcoind';
+executable['crea']='creativecoind';
+executable['rvn']='ravend';
+executable['nort']='northernd';
+executable['ifx']='infinexd';
+
 
 #Exchange
 exchange=dict();
@@ -138,6 +178,9 @@ exchange['tzc']=['cryptopia','TZC/BTC'];
 exchange['dnr']=['cryptopia','DNR/BTC'];
 exchange['crea']=['cryptopia','CREA/BTC'];
 exchange['btg']=['yobit','btg_btc'];
+exchange['rvn']=['cryptobridge','RVN_BTC'];
+exchange['nort']=['cryptobridge','NORT_BTC'];
+exchange['ifx']=['cryptobridge','IFX_BTC'];
 
 def alias(orig,see,replace,name='',cond=''):
 	if orig==see and name==cond:
@@ -148,6 +191,7 @@ def alias(orig,see,replace,name='',cond=''):
 def aliases(algo,coin):
 	algo=alias(algo,'groestle','myr-gr','j',coin);
 	algo=alias(algo,'groestle','groestl');
+	algo=alias(algo,'groestl','myr-gr');
 	algo=alias(algo,'myriad-groestl','myr-gr');
 	algo=alias(algo,'pentablake','penta');
 	algo=alias(algo,'whirlpool','whirl');

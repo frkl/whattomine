@@ -134,6 +134,10 @@ class wallet:
 										reward=reward/5.0; #25->5
 									elif self.name=='xlr':
 										reward=reward/2.0*1.0; #2->1.0
+									elif self.name=='nort':
+										reward=reward/2.0*1.0; #10->5
+									elif self.name=='ifx':
+										reward=reward/11.0*5.0; #10->5
 									self.reward_history.append((i,reward));
 									if len(self.reward_history)>self.reward_history_limit:
 										self.reward_history.pop(0);
@@ -194,7 +198,7 @@ class whattomine:
 			if self.name=='kmd':
 				#komodo work around
 				self.difficulty[self.algorithm]=data['difficulty']/pow(2.0,29);
-			elif self.name=='zec' or self.name=='zcl':
+			elif self.name=='zec' or self.name=='zcl' or self.name=='btg':
 				#zec work around
 				self.difficulty[self.algorithm]=data['difficulty']/pow(2.0,20);
 			elif self.name=='eth' or self.name=='sc' or self.name=='etc':
@@ -281,6 +285,7 @@ class exchange:
 	tickers=dict();
 	bittrex_api='https://bittrex.com/api/v1.1/public/getmarketsummaries'
 	tradesatoshi_api='https://tradesatoshi.com/api/public/getmarketsummaries'
+	cryptobridge_api='https://api.crypto-bridge.org/api/v1/ticker'
 	poloniex_api='https://poloniex.com/public?command=returnTicker';
 	ccex_api='https://c-cex.com/t/prices.json';
 	cryptopia_api='https://www.cryptopia.co.nz/api/GetMarkets';
@@ -422,6 +427,24 @@ class exchange:
 				
 			except:
 				print('Exchange: error getting price from yobit');
+		
+		#Cryptobridge
+		try:
+			r=requests.get(self.cryptobridge_api,timeout=10);
+			tickers=json.loads(r.content);
+			for t in tickers:
+				if ('cryptobridge',t['id']) in tocoin:
+					c=tocoin[('cryptobridge',t['id'])];
+					self.tickers[c]=float(t['bid']);
+			
+		except:
+			print('Exchange: error getting price from cryptobridge');
+		
+		#Guesstimate
+		for m in tocoin:
+			if m[0]=='const':
+				c=tocoin[m];
+				self.tickers[c]=m[1];
 		
 		return;
 
