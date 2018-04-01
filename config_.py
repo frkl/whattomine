@@ -145,7 +145,7 @@ I_wallet_mine.append(['flax','c11',alexis]);
 #I_wallet_mine.append(['dnr','tribus',tpruvot]);
 #I_wallet_mine.append(['crea','keccakc',tpruvot]);
 I_wallet_mine.append(['btx','bitcore',tpruvot]);
-I_wallet_mine.append(['rvn','x16r',msft]);
+I_wallet_mine.append(['rvn','x16r',tpruvot]);
 I_wallet_mine.append(['nort','xevan',krnlx]);
 I_wallet_mine.append(['ifx','lyra2z',tpruvot]);
 
