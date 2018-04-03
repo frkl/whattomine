@@ -138,6 +138,10 @@ class wallet:
 										reward=reward/2.0*1.0; #10->5
 									elif self.name=='ifx':
 										reward=reward/11.0*5.0; #10->5
+									elif self.name=='bwk':
+										reward=reward*0.5; #50->25
+									elif self.name=='proton':
+										reward=reward*0.3; #25->7.5
 									self.reward_history.append((i,reward));
 									if len(self.reward_history)>self.reward_history_limit:
 										self.reward_history.pop(0);
