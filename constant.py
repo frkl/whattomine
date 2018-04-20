@@ -52,6 +52,8 @@ algo_lookup['btg']='eqhash';
 algo_lookup['rvn']='x16r';
 algo_lookup['nort']='xevan';
 algo_lookup['ifx']='lyra2z';
+algo_lookup['bwk']='nist5';
+algo_lookup['proton']='x16r';
 
 
 
@@ -97,6 +99,8 @@ wallets_key['crea']='creativecoin';
 wallets_key['rvn']='Raven';
 wallets_key['nort']='northern';
 wallets_key['ifx']='Infinex';
+wallets_key['bwk']='Bulwark';
+wallets_key['proton']='proton';
 
 #executable names
 executable=dict();
@@ -130,6 +134,8 @@ executable['crea']='creativecoind';
 executable['rvn']='ravend';
 executable['nort']='northernd';
 executable['ifx']='infinexd';
+executable['bwk']='bulwarkd';
+executable['proton']='protond';
 
 
 #Exchange
@@ -165,6 +171,7 @@ exchange['xre']=['cryptopia','XRE/BTC']
 exchange['mac']=['cryptopia','MAC/BTC']
 exchange['hsr']=['cryptopia','HSR/BTC']
 exchange['lux']=['cryptopia','LUX/BTC']
+exchange['bwk']=['cryptopia','BWK/BTC']
 exchange['log']=['ccex','log-btc']
 exchange['boat']=['tradesatoshi','BOAT_BTC']
 exchange['sigt']=['coinmarketcap','signatum']
@@ -181,6 +188,7 @@ exchange['btg']=['yobit','btg_btc'];
 exchange['rvn']=['cryptobridge','RVN_BTC'];
 exchange['nort']=['cryptobridge','NORT_BTC'];
 exchange['ifx']=['cryptobridge','IFX_BTC'];
+exchange['proton']=['cryptobridge','PROTON_BTC'];
 
 def alias(orig,see,replace,name='',cond=''):
 	if orig==see and name==cond:
