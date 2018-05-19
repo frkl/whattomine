@@ -128,6 +128,8 @@ class wallet:
 										reward=reward/8.0*4.4;
 									elif self.name=='flax':
 										reward=reward/0.71*0.48;
+									elif self.name=='mac':
+										reward=reward*0.45;
 									elif self.name=='sib':
 										reward=reward/2.0;
 									elif self.name=='bsd':
@@ -141,7 +143,7 @@ class wallet:
 									elif self.name=='bwk':
 										reward=reward*0.5; #50->25
 									elif self.name=='proton':
-										reward=reward*0.3; #25->7.5
+										reward=reward*0.15; #25->7.5
 									self.reward_history.append((i,reward));
 									if len(self.reward_history)>self.reward_history_limit:
 										self.reward_history.pop(0);
@@ -296,6 +298,7 @@ class exchange:
 	yobit_api='https://yobit.net/api/3/ticker/';
 	novaexchange_api='https://novaexchange.com/remote/v2/markets/';
 	coinmarketcap_api='https://api.coinmarketcap.com/v1/ticker/%s/';
+	graviex_api='https://graviex.net/api/v2/tickers'
 	def __init__(self):
 		self.tickers=dict();
 		self.coins=dict();
@@ -434,15 +437,28 @@ class exchange:
 		
 		#Cryptobridge
 		try:
-			r=requests.get(self.cryptobridge_api,timeout=10);
+			r=requests.get(self.cryptobridge_api,timeout=15);
 			tickers=json.loads(r.content);
 			for t in tickers:
 				if ('cryptobridge',t['id']) in tocoin:
 					c=tocoin[('cryptobridge',t['id'])];
 					self.tickers[c]=float(t['bid']);
-			
+			#
 		except:
 			print('Exchange: error getting price from cryptobridge');
+		
+		#Graviex
+		try:
+			r=requests.get(self.graviex_api,timeout=15);
+			tickers=json.loads(r.content);
+			print(tickers['protonbtc'])
+			for t in tickers:
+				if ('graviex',t) in tocoin:
+					c=tocoin[('graviex',t)];
+					self.tickers[c]=float(tickers[t]['ticker']['buy']);
+			#
+		except:
+			print('Exchange: error getting price from graviex');
 		
 		#Guesstimate
 		for m in tocoin:
